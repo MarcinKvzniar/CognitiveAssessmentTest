@@ -2,41 +2,37 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:background="@drawable/bacl_light_mainscreen"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MemoryWords.Memory_words_activity">
 
-
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="208dp"
-        android:layout_height="78dp"
-        android:gravity="center"
-        android:text="Choose you game:"
-        android:textSize="22sp"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnStartGame"
+        android:layout_width="170dp"
+        android:layout_height="82dp"
+        android:text="start game"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textAllCaps="false"
+        android:background="@drawable/start_game_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025" />
+        app:layout_constraintVertical_bias="0.852" />
 
-    <Button
-        android:id="@+id/bn_memory_words"
-        android:layout_width="303dp"
-        android:layout_height="78dp"
-        android:background="@drawable/button_layout"
-        android:text="Words Memory Game"
-        android:textColor="#000000"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="204dp"
+        android:layout_height="94dp"
+        android:text="Here will be description of the game"
         android:textSize="22sp"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.183" />
-    
-
+        app:layout_constraintVertical_bias="0.392" />
 </androidx.constraintlayout.widget.ConstraintLayout>
