@@ -7,6 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".sudoku.SudokuActivity">
 
+    <TextView
+        android:id="@+id/tvTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="TIME: 00:00"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/sudokuGrid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <GridLayout
         android:id="@+id/sudokuGrid"
         android:layout_width="match_parent"
