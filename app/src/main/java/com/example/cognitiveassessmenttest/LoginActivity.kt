@@ -28,6 +28,12 @@ class LoginActivity : AppCompatActivity() {
         btnLogin.setOnClickListener {
             val intent = Intent(this, SudokuActivity::class.java)
             startActivity(intent)
+            // TODO implement login logic
+        }
+
+        btnGoToRegister.setOnClickListener {
+            startActivity(Intent(this@LoginActivity,
+                RegisterActivity::class.java))
         }
     }
 
