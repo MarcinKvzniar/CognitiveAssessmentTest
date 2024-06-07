@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backg_game_words"
     tools:context=".MemoryWords.MemoryWordsGame">
 
     <TextView
@@ -13,7 +14,7 @@
         android:layout_centerHorizontal="true"
         android:text="Words to Remember"
         android:gravity="center"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,13 +52,14 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSubmit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="126dp"
+        android:layout_height="57dp"
         android:layout_below="@id/etRecalledWords"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/black"
-        android:textSize="20sp"
+        android:background="@drawable/button_submit"
         android:text="Submit"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

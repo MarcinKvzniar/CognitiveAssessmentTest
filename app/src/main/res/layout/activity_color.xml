@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MemoryWords.Memory_words_activity">
+    tools:context=".ColorMatch.Color_activity">
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnStartGame"
@@ -29,7 +30,7 @@
         android:background="@drawable/wavy_text_box"
         android:gravity="center"
         android:padding="10dp"
-        android:text="In this memory game, you will be shown a list of 3 words for 5 seconds, after which the words will disappear, and you will need to recall and type them in an input field. This process repeats for 5 rounds with a new set  of words each time, and your performance will be evaluated based on the number of correctly recalled words. At the end,you will receive feedback on your short-term memory performance."
+        android:text="instruction for game"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

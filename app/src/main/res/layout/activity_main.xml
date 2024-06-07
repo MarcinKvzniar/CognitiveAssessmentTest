@@ -37,6 +37,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.183" />
-    
+
+    <Button
+        android:id="@+id/bn_color_match"
+        android:layout_width="303dp"
+        android:layout_height="78dp"
+        android:background="@drawable/button_layout"
+        android:text="Color Match Game"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.353" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
