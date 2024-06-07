@@ -15,7 +15,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cognitiveassessmenttest.R
-import java.util.Random
 
 class SudokuActivity : AppCompatActivity() {
 
@@ -59,11 +58,11 @@ class SudokuActivity : AppCompatActivity() {
                     if (value.isNotEmpty()) {
                         val num = value.toInt()
                         val board = Array(4) { IntArray(4) }
-                        for (i in 0 until 4) {
+                        for (k in 0 until 4) {
                             for (j in 0 until 4) {
-                                val editText = gridLayout.getChildAt(i * 4 + j) as EditText
-                                val value = editText.text.toString()
-                                board[i][j] = if (value.isEmpty()) 0 else value.toInt()
+                                val et = gridLayout.getChildAt(k * 4 + j) as EditText
+                                val square = et.text.toString()
+                                board[k][j] = if (square.isEmpty()) 0 else square.toInt()
                             }
                         }
                         if (!sudokuGenerator.isValid(board, i / 4, i % 4, num)) {
@@ -94,28 +93,20 @@ class SudokuActivity : AppCompatActivity() {
     }
 
     private fun addSampleNumbers() {
-        val random = Random()
-        val subsquareIndices = arrayOf(0, 2, 4, 6)
+        val numbers = mutableListOf(1, 2, 3, 4)
+        numbers.shuffle()
+
         val board = Array(4) { IntArray(4) }
 
-        for (i in subsquareIndices.indices) {
-            var num: Int
-            var cellIndex: Int
-            do {
-                num = random.nextInt(4) + 1
-                cellIndex = subsquareIndices[i] + random.nextInt(2) + (random.nextInt(2) * 4)
-            } while (!isNumberValid(num, cellIndex / 4, cellIndex % 4, board))
+        for (i in 0 until 4) {
+            val num = numbers[i]
 
-            val editText = gridLayout.getChildAt(cellIndex) as EditText
+            val editText = gridLayout.getChildAt(i * 4 + i) as EditText
             editText.setText(num.toString())
             editText.isFocusable = false
             editText.isFocusableInTouchMode = false
-            board[cellIndex / 4][cellIndex % 4] = num
+            board[i][i] = num
         }
-    }
-
-    private fun isNumberValid(num: Int, row: Int, col: Int, board: Array<IntArray>): Boolean {
-        return sudokuGenerator.isValid(board, row, col, num)
     }
 
     private fun runTimer() {

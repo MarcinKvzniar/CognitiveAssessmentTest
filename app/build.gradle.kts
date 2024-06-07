@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    id("io.realm.kotlin") version "1.16.0"
+    id("io.realm.kotlin") version "1.15.0"
 }
 
 android {
@@ -30,6 +30,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -42,6 +43,12 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+//    implementation(libs.kotlinx.coroutines.core)
+//    implementation(libs.kotlinx.coroutines.reactive)
+//    implementation(libs.mongodb.driver.kotlin.coroutine)
+//    implementation(libs.slf4j.simple)
+//    implementation(libs.reactor.core)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

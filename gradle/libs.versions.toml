@@ -1,5 +1,5 @@
 [versions]
-agp = "8.2.0"
+agp = "8.4.0"
 androidAdapters = "4.0.0"
 kotlin = "1.9.0"
 coreKtx = "1.13.0"
@@ -7,9 +7,15 @@ junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 appcompat = "1.6.1"
+kotlinxCoroutinesCore = "1.7.0"
+kotlinxCoroutinesCoreVersion = "1.6.4"
 material = "1.12.0"
 activity = "1.8.0"
 constraintlayout = "2.1.4"
+mongodbDriverKotlinCoroutine = "4.10.1"
+mongodbKotlinDriver = "1.2.1"
+reactorCore = "3.5.0"
+slf4jSimple = "1.7.9"
 
 [libraries]
 android-adapters = { module = "io.realm:android-adapters", version.ref = "androidAdapters" }
@@ -18,9 +24,16 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+kotlinx-coroutines-core-v164 = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCoreVersion" }
+kotlinx-coroutines-reactive = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-reactive", version.ref = "kotlinxCoroutinesCoreVersion" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+mongodb-driver-kotlin-coroutine = { module = "org.mongodb:mongodb-driver-kotlin-coroutine", version.ref = "mongodbDriverKotlinCoroutine" }
+mongodb-kotlin-driver = { module = "org.mongodb.kotlin:mongodb-kotlin-driver", version.ref = "mongodbKotlinDriver" }
+reactor-core = { module = "io.projectreactor:reactor-core", version.ref = "reactorCore" }
+slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4jSimple" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
