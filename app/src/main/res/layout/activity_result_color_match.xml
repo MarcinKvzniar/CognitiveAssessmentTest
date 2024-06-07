@@ -5,22 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="@drawable/backg_results"
     tools:context=".ColorMatch.ResultActivityColorMatch">
 
     <TextView
         android:id="@+id/scoreText"
-        android:layout_width="271dp"
-        android:layout_height="212dp"
+        android:layout_width="304dp"
+        android:layout_height="407dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/wavy_text_box"
         android:textAlignment="center"
         android:textSize="24sp"
-        android:background="@drawable/wavy_text_box"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.326" />
+        app:layout_constraintVertical_bias="0.253" />
 
     <Button
         android:id="@+id/buttonTryAgain"

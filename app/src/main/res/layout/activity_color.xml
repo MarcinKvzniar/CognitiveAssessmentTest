@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/walp1"
     tools:context=".ColorMatch.Color_activity">
 
 
@@ -30,7 +31,9 @@
         android:background="@drawable/wavy_text_box"
         android:gravity="center"
         android:padding="10dp"
-        android:text="instruction for game"
+        android:text="explanation what there should be done.
+         Scoring: The score is based on how fast and accurately you finish the game. You get points for being quick and accurate, but you lose points for making mistakes or thinking too long.
+"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
