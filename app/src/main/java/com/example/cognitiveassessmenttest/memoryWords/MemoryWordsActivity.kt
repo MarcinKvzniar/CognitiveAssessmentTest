@@ -1,5 +1,6 @@
 package com.example.cognitiveassessmenttest.memoryWords
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -21,14 +22,16 @@ class MemoryWordsActivity : AppCompatActivity() {
         }
     }
 
-    fun startGame() {
+    private fun startGame() {
         // Start timer before transitioning to game activity
         object : CountDownTimer(4000, 1000) {
+            @SuppressLint("SetTextI18n")
             override fun onTick(millisUntilFinished: Long) {
                 val secondsLeft = millisUntilFinished / 1000
                 btnStartGame.text = "Starting in $secondsLeft"
             }
 
+            @SuppressLint("SetTextI18n")
             override fun onFinish() {
                 btnStartGame.text = "Start Game"
                 navigateToGame()

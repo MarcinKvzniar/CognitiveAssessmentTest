@@ -1,6 +1,7 @@
 package com.example.cognitiveassessmenttest.sudoku
 
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Gravity
 import android.widget.Button
 import android.widget.EditText
@@ -16,6 +18,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cognitiveassessmenttest.R
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.firestore.firestore
+import java.util.Date
 
 class SudokuActivity : AppCompatActivity() {
 
@@ -88,13 +94,31 @@ class SudokuActivity : AppCompatActivity() {
             if (checkSudokuValidity()) {
                 Toast.makeText(this, "Sudoku is solved!", Toast.LENGTH_SHORT).show()
 
-                val intent = Intent(this, SudokuResultActivity::class.java)
+                val db = Firebase.firestore
+                val userId = Firebase.auth.currentUser?.uid
 
-                intent.putExtra("TIME_TAKEN", seconds)
+                val game = hashMapOf(
+                    "time" to seconds,
+                )
 
-                startActivity(intent)
-                finish()
+                val gameInstance = Date().toString()
 
+                db.collection("users")
+                    .document(userId!!)
+                    .collection("games")
+                    .document("sudoku")
+                    .collection("instances")
+                    .document(gameInstance)
+                    .set(game)
+                    .addOnSuccessListener {
+                        val intent = Intent(this, SudokuResultActivity::class.java)
+                        intent.putExtra("TIME_TAKEN", seconds)
+                        startActivity(intent)
+                        finish()
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w(TAG, "Error writing document", e)
+                    }
 
             } else {
                 Toast.makeText(this, "Sudoku is not solved!", Toast.LENGTH_SHORT).show()

@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".sudoku.SudokuActivity">
+    tools:context=".sudoku.SudokuActivity"
+    android:background="@drawable/sudoku_bg">
 
     <TextView
         android:id="@+id/tvTimer"

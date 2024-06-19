@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".memoryWords.MemoryWordsActivity">
+    tools:context=".memoryWords.MemoryWordsActivity"
+    android:background="@drawable/sudoku_bg">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnStartGame"
@@ -30,7 +31,7 @@
         android:background="@drawable/wavy_text_box"
         android:gravity="center"
         android:padding="10dp"
-        android:text="In this game, you will have to resolve a 4x4 sudoku. The timer will be counting up, and your performance will be evaluated based on the achieved result. At the end, you will receive feedback on your cognitive abilities performance."
+        android:text="In this game, you will have to solve a 4x4 sudoku puzzle. The timer will be counting up, and your performance will be evaluated based on the achieved result. At the end, you will receive feedback on your cognitive abilities."
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

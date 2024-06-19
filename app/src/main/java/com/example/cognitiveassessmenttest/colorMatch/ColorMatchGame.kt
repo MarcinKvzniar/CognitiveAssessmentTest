@@ -1,13 +1,20 @@
 package com.example.cognitiveassessmenttest.colorMatch
 
+import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cognitiveassessmenttest.R
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.firestore.firestore
+import java.util.Date
 
 class ColorMatchGame : AppCompatActivity() {
 
@@ -18,7 +25,6 @@ class ColorMatchGame : AppCompatActivity() {
     private var secondSelected: Button? = null
     private var pairsFound = 0
     private var attempts = 0
-    private var startTime: Long = 0
     private var gameStartTime: Long = 0
     private lateinit var colorFlipTimer: CountDownTimer
     private lateinit var gameplayTimer: CountDownTimer
@@ -49,6 +55,7 @@ class ColorMatchGame : AppCompatActivity() {
 
     private fun startColorFlipCountDown() {
         colorFlipTimer = object : CountDownTimer(5000, 1000) {
+            @SuppressLint("SetTextI18n")
             override fun onTick(millisUntilFinished: Long) {
                 timerTextView.text = "Time until cards are turned over: ${millisUntilFinished / 1000} s"
             }
@@ -64,6 +71,7 @@ class ColorMatchGame : AppCompatActivity() {
     private fun startGameplayTimer() {
         gameStartTime = System.currentTimeMillis()
         gameplayTimer = object : CountDownTimer(Long.MAX_VALUE, 1000) {
+            @SuppressLint("SetTextI18n")
             override fun onTick(millisUntilFinished: Long) {
                 val elapsedSeconds = ((System.currentTimeMillis() - gameStartTime) / 1000).toInt()
                 timerTextView.text = "Time: $elapsedSeconds s"
@@ -166,15 +174,37 @@ class ColorMatchGame : AppCompatActivity() {
             else -> "Below Average"
         }
 
-        // Launch the result activity
-        val intent = Intent(this, ResultActivityColorMatch::class.java).apply {
-            putExtra("TIME_TAKEN", timeTaken)
-            putExtra("ATTEMPTS", attempts)
-            putExtra("TIME_CATEGORY", timeCategory)
-            putExtra("ATTEMPTS_CATEGORY", attemptsCategory)
-        }
-        startActivity(intent)
-        finish()
+        val db = Firebase.firestore
+
+        val userId = Firebase.auth.currentUser?.uid
+
+        val game = hashMapOf(
+            "time" to timeTaken,
+            "attempts" to attempts,
+        )
+
+        val gameInstance = Date().toString()
+
+        db.collection("users")
+            .document(userId!!)
+            .collection("games")
+            .document("colorMatch")
+            .collection("instances")
+            .document(gameInstance)
+            .set(game)
+            .addOnSuccessListener {
+                val intent = Intent(this, ResultActivityColorMatch::class.java).apply {
+                    putExtra("TIME_TAKEN", timeTaken)
+                    putExtra("ATTEMPTS", attempts)
+                    putExtra("TIME_CATEGORY", timeCategory)
+                    putExtra("ATTEMPTS_CATEGORY", attemptsCategory)
+                }
+                startActivity(intent)
+                finish()
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error writing document", e)
+            }
     }
 
     override fun onDestroy() {

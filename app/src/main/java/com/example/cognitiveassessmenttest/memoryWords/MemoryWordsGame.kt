@@ -1,13 +1,20 @@
 package com.example.cognitiveassessmenttest.memoryWords
 
+import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cognitiveassessmenttest.R
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.firestore.firestore
+import java.util.Date
 
 class MemoryWordsGame : AppCompatActivity() {
     private lateinit var tvWordsToRemember: TextView
@@ -60,6 +67,7 @@ class MemoryWordsGame : AppCompatActivity() {
         displayWords()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun displayWords() {
         val wordsToShow = wordList.joinToString(", ")
         tvWordsToRemember.text = "Words to Remember: $wordsToShow"
@@ -82,7 +90,7 @@ class MemoryWordsGame : AppCompatActivity() {
 
     private fun evaluateRound() {
         val recalledWords = etRecalledWords.text.toString().trim()
-            .split("\\s*,\\s*|\\s+".toRegex())
+            .split("\\s+|,\\s*".toRegex())
             .map { it.lowercase() }
         val correctlyRecalled = recalledWords.count { it in wordList.map { word -> word.lowercase() } }
 
@@ -102,20 +110,43 @@ class MemoryWordsGame : AppCompatActivity() {
     }
 
     private fun showResults() {
-        val averageWordsRemembered = totalWordsRemembered.toFloat() / 15 // Calculate based on 15 words total (3 words x 5 rounds)
+        val averageWordsRemembered = totalWordsRemembered / 5f
         val feedback = when {
-            averageWordsRemembered >= 8f / 3f -> "Excellent"
-            averageWordsRemembered >= 6f / 3f -> "Good"
-            averageWordsRemembered >= 4f / 3f -> "Average"
+            averageWordsRemembered >= 2.5f -> "Excellent"
+            averageWordsRemembered >= 2.0f -> "Good"
+            averageWordsRemembered >= 1.5f -> "Average"
             else -> "Below Average"
         }
 
         val resultsText = "Your short-term memory performance is $feedback based on the number of words you remembered."
-        val intent = Intent(this, ResultActivityMemoryWords::class.java).apply {
-            putExtra("resultsText", resultsText)
-        }
-        startActivity(intent)
-        finish()
+
+        val db = Firebase.firestore
+
+        val userId = Firebase.auth.currentUser?.uid
+
+        val game = hashMapOf(
+            "avgWordsRemembered" to averageWordsRemembered,
+        )
+
+        val gameInstance = Date().toString()
+
+        db.collection("users")
+            .document(userId!!)
+            .collection("games")
+            .document("memoryWords")
+            .collection("instances")
+            .document(gameInstance)
+            .set(game)
+            .addOnSuccessListener {
+                val intent = Intent(this, ResultActivityMemoryWords::class.java).apply {
+                    putExtra("resultsText", resultsText)
+                }
+                startActivity(intent)
+                finish()
+            }
+            .addOnFailureListener { e ->
+                Log.w(ContentValues.TAG, "Error writing document", e)
+            }
     }
 
     companion object {

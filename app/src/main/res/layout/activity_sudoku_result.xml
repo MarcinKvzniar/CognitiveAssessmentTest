@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context=".colorMatch.ResultActivityColorMatch">
+    tools:context=".colorMatch.ResultActivityColorMatch"
+    android:background="@drawable/sudoku_bg">
 
     <TextView
         android:id="@+id/scoreText"

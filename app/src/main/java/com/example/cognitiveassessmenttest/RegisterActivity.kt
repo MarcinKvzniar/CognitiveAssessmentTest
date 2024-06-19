@@ -11,16 +11,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cognitiveassessmenttest.firestore.FireStoreClass
 import com.example.cognitiveassessmenttest.firestore.User
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.firestore
 import java.text.SimpleDateFormat
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var btnRegister: Button
     private lateinit var btnGoToLogin: TextView
-    private lateinit var inputNameReg: EditText
-    private lateinit var inputSurnameReg: EditText
+    private lateinit var inputUsernameReg: EditText
     private lateinit var inputDateOfBirthReg: EditText
     private lateinit var inputEmailReg: EditText
     private lateinit var inputPasswordReg: EditText
@@ -48,8 +49,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun initViews() {
         btnRegister = findViewById(R.id.btnRegister)
         btnGoToLogin = findViewById(R.id.btnGoToLogin)
-        inputNameReg = findViewById(R.id.inputName)
-        inputSurnameReg = findViewById(R.id.inputSurnameReg)
+        inputUsernameReg = findViewById(R.id.inputUsername)
         inputDateOfBirthReg = findViewById(R.id.inputDateOfBirthReg)
         inputEmailReg = findViewById(R.id.inputEmailReg)
         inputPasswordReg = findViewById(R.id.inputPasswordReg)
@@ -62,12 +62,8 @@ class RegisterActivity : AppCompatActivity() {
         val specialChars = "!@#$%^&*-_+(){}/[]|".toCharArray()
 
         return when {
-            TextUtils.isEmpty(inputNameReg.text.toString().trim { it <= ' ' }) -> {
+            TextUtils.isEmpty(inputUsernameReg.text.toString().trim { it <= ' ' }) -> {
                 showBasicToast(resources.getString(R.string.err_msg_enter_name))
-                false
-            }
-            TextUtils.isEmpty(inputSurnameReg.text.toString().trim { it <= ' ' }) -> {
-                showBasicToast(resources.getString(R.string.err_msg_enter_surname))
                 false
             }
             TextUtils.isEmpty(inputDateOfBirthReg.text.toString().trim { it <= ' ' }) -> {
@@ -111,8 +107,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun registerUser() {
         val email = inputEmailReg.text.toString().trim()
         val password = inputPasswordReg.text.toString().trim()
-        val name = inputNameReg.text.toString().trim()
-        val surname = inputSurnameReg.text.toString().trim()
+        val username = inputUsernameReg.text.toString().trim()
         val dob = inputDateOfBirthReg.text.toString().trim()
 
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
@@ -122,8 +117,25 @@ class RegisterActivity : AppCompatActivity() {
                     showBasicToast("You are registered successfully." +
                             " Your user id is ${firebaseUser.uid}")
 
-                    val user = User("Test ID", name, surname, dob, email, true)
-                    FireStoreClass().registerUserFS(this@RegisterActivity, user)
+                    val user = User(firebaseUser.uid, username, dob, email, true)
+
+                    val db = Firebase.firestore
+
+                    val userData = hashMapOf(
+                        "username" to username,
+                        "dob" to dob,
+                        "email" to email
+                    )
+
+                    db.collection("users")
+                        .document(firebaseUser.uid)
+                        .set(userData)
+                        .addOnSuccessListener {
+                            FireStoreClass().registerUserFS(this@RegisterActivity, user)
+                        }
+                        .addOnFailureListener { e ->
+                            showBasicToast(e.message.toString())
+                        }
 
                     startActivity(
                         Intent(this@RegisterActivity,
