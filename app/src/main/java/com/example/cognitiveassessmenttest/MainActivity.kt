@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        
         val bn_memory_words = findViewById<Button>(R.id.bn_memory_words)
         bn_memory_words.setOnClickListener {
             val intent = Intent(this, Memory_words_activity::class.java)
@@ -25,6 +26,4 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
-
 }

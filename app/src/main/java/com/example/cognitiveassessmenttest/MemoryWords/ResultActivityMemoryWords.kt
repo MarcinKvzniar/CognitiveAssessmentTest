@@ -37,9 +37,6 @@ class ResultActivityMemoryWords : AppCompatActivity() {
             val intent = Intent(this, Memory_words_activity::class.java)
             startActivity(intent)
         }
-
-
     }
-
-
 }
+
