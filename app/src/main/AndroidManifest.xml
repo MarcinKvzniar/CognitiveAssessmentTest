@@ -31,7 +31,7 @@
             android:name=".MemoryWords.Memory_words_activity"
             android:exported="false" />
         <activity
-            android:name=".sudoku.SudokuActivity"
+            android:name=".Sudoku.SudokuActivity"
             android:exported="false"/>
         <activity
             android:name=".RegisterActivity"

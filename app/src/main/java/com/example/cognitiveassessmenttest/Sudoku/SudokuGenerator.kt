@@ -1,4 +1,4 @@
-package com.example.cognitiveassessmenttest.sudoku
+package com.example.cognitiveassessmenttest.Sudoku
 
 class SudokuGenerator {
 

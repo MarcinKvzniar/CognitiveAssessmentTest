@@ -9,7 +9,7 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.cognitiveassessmenttest.sudoku.SudokuActivity
+import com.example.cognitiveassessmenttest.Sudoku.SudokuActivity
 
 class LoginActivity : AppCompatActivity() {
 

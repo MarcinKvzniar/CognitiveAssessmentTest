@@ -1,4 +1,4 @@
-package com.example.cognitiveassessmenttest.sudoku
+package com.example.cognitiveassessmenttest.Sudoku
 
 import android.annotation.SuppressLint
 import android.graphics.Color
