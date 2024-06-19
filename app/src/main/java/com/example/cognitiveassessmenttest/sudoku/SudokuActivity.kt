@@ -1,6 +1,7 @@
-package com.example.cognitiveassessmenttest.Sudoku
+package com.example.cognitiveassessmenttest.sudoku
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
@@ -85,7 +86,16 @@ class SudokuActivity : AppCompatActivity() {
         solveButton.setOnClickListener {
             running = false
             if (checkSudokuValidity()) {
-                Toast.makeText(this, "Sudoku is solved! \n ${tvTimer.text}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Sudoku is solved!", Toast.LENGTH_SHORT).show()
+
+                val intent = Intent(this, SudokuResultActivity::class.java)
+
+                intent.putExtra("TIME_TAKEN", seconds)
+
+                startActivity(intent)
+                finish()
+
+
             } else {
                 Toast.makeText(this, "Sudoku is not solved!", Toast.LENGTH_SHORT).show()
             }

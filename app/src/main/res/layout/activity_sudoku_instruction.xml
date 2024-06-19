@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/walp1"
-    tools:context=".colorMatch.ColorActivity">
-
+    tools:context=".memoryWords.MemoryWordsActivity">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnStartGame"
@@ -22,7 +20,8 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.895" />
+        app:layout_constraintVertical_bias="0.895"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/textView"
@@ -31,14 +30,13 @@
         android:background="@drawable/wavy_text_box"
         android:gravity="center"
         android:padding="10dp"
-        android:text="explanation what there should be done.
-         Scoring: The score is based on how fast and accurately you finish the game. You get points for being quick and accurate, but you lose points for making mistakes or thinking too long.
-"
+        android:text="In this game, you will have to resolve a 4x4 sudoku. The timer will be counting up, and your performance will be evaluated based on the achieved result. At the end, you will receive feedback on your cognitive abilities performance."
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.231" />
+        app:layout_constraintVertical_bias="0.231"
+        tools:ignore="HardcodedText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

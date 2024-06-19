@@ -1,4 +1,4 @@
-package com.example.cognitiveassessmenttest.MemoryWords
+package com.example.cognitiveassessmenttest.memoryWords
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,8 +7,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.cognitiveassessmenttest.MemoryWords.ResultActivityMemoryWords
-import com.example.cognitiveassessmenttest.MemoryWords.WordList
 import com.example.cognitiveassessmenttest.R
 
 class MemoryWordsGame : AppCompatActivity() {

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:background="@drawable/backg_results"
-    tools:context=".ColorMatch.ResultActivityColorMatch">
+    tools:context=".colorMatch.ResultActivityColorMatch">
 
     <TextView
         android:id="@+id/scoreText"

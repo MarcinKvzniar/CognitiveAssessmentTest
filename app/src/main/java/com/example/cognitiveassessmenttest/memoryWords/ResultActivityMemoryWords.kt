@@ -1,4 +1,4 @@
-package com.example.cognitiveassessmenttest.MemoryWords
+package com.example.cognitiveassessmenttest.memoryWords
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -34,7 +34,7 @@ class ResultActivityMemoryWords : AppCompatActivity() {
         }
 
         buttonTryAgain.setOnClickListener {
-            val intent = Intent(this, Memory_words_activity::class.java)
+            val intent = Intent(this, MemoryWordsActivity::class.java)
             startActivity(intent)
         }
 

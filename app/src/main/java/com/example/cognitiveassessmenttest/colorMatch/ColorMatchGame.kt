@@ -1,4 +1,4 @@
-package com.example.cognitiveassessmenttest.ColorMatch
+package com.example.cognitiveassessmenttest.colorMatch
 
 import android.content.Intent
 import android.os.Bundle

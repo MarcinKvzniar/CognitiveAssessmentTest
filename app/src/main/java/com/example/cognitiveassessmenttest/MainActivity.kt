@@ -5,9 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.example.cognitiveassessmenttest.ColorMatch.Color_activity
-import com.example.cognitiveassessmenttest.MemoryWords.Memory_words_activity
-import com.example.cognitiveassessmenttest.Sudoku.SudokuActivity
+import com.example.cognitiveassessmenttest.colorMatch.ColorActivity
+import com.example.cognitiveassessmenttest.memoryWords.MemoryWordsActivity
+import com.example.cognitiveassessmenttest.sudoku.SudokuInstructionActivity
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -15,21 +15,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val bn_memory_words = findViewById<Button>(R.id.bn_memory_words)
-        bn_memory_words.setOnClickListener {
-            val intent = Intent(this, Memory_words_activity::class.java)
+        val bnMemoryWords = findViewById<Button>(R.id.bn_memory_words)
+        bnMemoryWords.setOnClickListener {
+            val intent = Intent(this, MemoryWordsActivity::class.java)
             startActivity(intent)
         }
 
-        val bn_color_match = findViewById<Button>(R.id.bn_color_match)
-        bn_color_match.setOnClickListener {
-            val intent = Intent(this, Color_activity::class.java)
+        val bnColorMatch = findViewById<Button>(R.id.bn_color_match)
+        bnColorMatch.setOnClickListener {
+            val intent = Intent(this, ColorActivity::class.java)
             startActivity(intent)
         }
 
-        val bn_sudoku = findViewById<Button>(R.id.bn_sudoku)
-        bn_sudoku.setOnClickListener {
-            val intent = Intent(this, SudokuActivity::class.java)
+        val bnSudoku = findViewById<Button>(R.id.bn_sudoku)
+        bnSudoku.setOnClickListener {
+            val intent = Intent(this, SudokuInstructionActivity::class.java)
             startActivity(intent)
         }
     }

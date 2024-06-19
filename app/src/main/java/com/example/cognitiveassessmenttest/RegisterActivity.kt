@@ -9,8 +9,8 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.cognitiveassessmenttest.Firestore.FireStoreClass
-import com.example.cognitiveassessmenttest.Firestore.User
+import com.example.cognitiveassessmenttest.firestore.FireStoreClass
+import com.example.cognitiveassessmenttest.firestore.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import java.text.SimpleDateFormat
@@ -33,8 +33,16 @@ class RegisterActivity : AppCompatActivity() {
 
         initViews()
 
+        btnGoToLogin.setOnClickListener {
+            startActivity(Intent(this@RegisterActivity,
+                LoginActivity::class.java))
+        }
 
-
+        btnRegister.setOnClickListener {
+            if (validateRegisterDetails()) {
+                registerUser()
+            }
+        }
     }
 
     private fun initViews() {
@@ -144,9 +152,8 @@ class RegisterActivity : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun goToMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish()
+    fun userRegistrationSuccess() {
+        Toast.makeText(this@RegisterActivity, getString(R.string.register_success),
+            Toast.LENGTH_LONG).show()
     }
 }

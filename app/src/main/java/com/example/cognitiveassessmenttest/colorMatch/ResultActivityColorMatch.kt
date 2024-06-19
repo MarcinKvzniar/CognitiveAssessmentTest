@@ -1,10 +1,10 @@
-package com.example.cognitiveassessmenttest.ColorMatch
+package com.example.cognitiveassessmenttest.colorMatch
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.example.cognitiveassessmenttest.MainActivity
 import com.example.cognitiveassessmenttest.R
 

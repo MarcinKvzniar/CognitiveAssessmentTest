@@ -1,4 +1,4 @@
-package com.example.cognitiveassessmenttest.Firestore
+package com.example.cognitiveassessmenttest.firestore
 
 import com.example.cognitiveassessmenttest.RegisterActivity
 import com.google.firebase.firestore.FirebaseFirestore

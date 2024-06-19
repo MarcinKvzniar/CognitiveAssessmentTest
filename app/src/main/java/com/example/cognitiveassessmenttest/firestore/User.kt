@@ -1,4 +1,4 @@
-package com.example.cognitiveassessmenttest.Firestore
+package com.example.cognitiveassessmenttest.firestore
 
 class User(
     val id: String="",

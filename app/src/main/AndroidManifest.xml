@@ -13,34 +13,40 @@
         android:theme="@style/Theme.CognitiveAssessmentTest"
         tools:targetApi="31">
         <activity
-            android:name=".ColorMatch.ResultActivityColorMatch"
+            android:name=".sudoku.SudokuResultActivity"
             android:exported="false" />
         <activity
-            android:name=".ColorMatch.ColorMatchGame"
+            android:name=".colorMatch.ResultActivityColorMatch"
             android:exported="false" />
         <activity
-            android:name=".ColorMatch.Color_activity"
+            android:name=".colorMatch.ColorMatchGame"
             android:exported="false" />
         <activity
-            android:name=".MemoryWords.ResultActivityMemoryWords"
+            android:name=".colorMatch.ColorActivity"
             android:exported="false" />
         <activity
-            android:name=".MemoryWords.MemoryWordsGame"
+            android:name=".memoryWords.ResultActivityMemoryWords"
             android:exported="false" />
         <activity
-            android:name=".MemoryWords.Memory_words_activity"
+            android:name=".memoryWords.MemoryWordsGame"
             android:exported="false" />
         <activity
-            android:name=".Sudoku.SudokuActivity"
-            android:exported="false"/>
+            android:name=".memoryWords.MemoryWordsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".sudoku.SudokuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".sudoku.SudokuInstructionActivity"
+            android:exported="false" />
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
-            android:exported="false"/>
-        <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

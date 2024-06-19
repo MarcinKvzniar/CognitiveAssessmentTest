@@ -1,4 +1,4 @@
-package com.example.cognitiveassessmenttest.MemoryWords
+package com.example.cognitiveassessmenttest.memoryWords
 
 class WordList {
     val words = listOf(

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backg_game_words"
-    tools:context=".MemoryWords.MemoryWordsGame">
+    tools:context=".memoryWords.MemoryWordsGame">
 
     <TextView
         android:id="@+id/tvWordsToRemember"

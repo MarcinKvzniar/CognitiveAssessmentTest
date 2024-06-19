@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/walp_color_match"
-    tools:context=".ColorMatch.ColorMatchGame">
+    tools:context=".colorMatch.ColorMatchGame">
 
     <TextView
         android:id="@+id/timerTextView"
