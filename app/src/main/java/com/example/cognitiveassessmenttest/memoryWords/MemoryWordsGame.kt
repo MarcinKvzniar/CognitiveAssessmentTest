@@ -16,22 +16,31 @@ import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import java.util.Date
 
+/**
+ * This is the main activity for the Memory Words game.
+ * It handles the game logic, including the countdown timers, button listeners, and game end.
+ */
 class MemoryWordsGame : AppCompatActivity() {
+    // UI elements and game variables
     private lateinit var tvWordsToRemember: TextView
     private lateinit var tvTimer: TextView
     private lateinit var etRecalledWords: EditText
     private lateinit var btnSubmit: Button
-
     private val wordListInstance = WordList()
     private var wordList = mutableListOf<String>()
     private var currentRound = 0
     private var totalWordsRemembered = 0
     private var countDownTimer: CountDownTimer? = null
 
+    /**
+     * This function is called when the activity is starting.
+     * It initializes the activity, sets the content view, and starts the game.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_memory_words_game)
 
+        // Initialize the UI elements
         tvWordsToRemember = findViewById(R.id.tvWordsToRemember)
         tvTimer = findViewById(R.id.tvTimer)
         etRecalledWords = findViewById(R.id.etRecalledWords)
@@ -54,6 +63,10 @@ class MemoryWordsGame : AppCompatActivity() {
         }
     }
 
+    /**
+     * This function is called when the activity state is saved.
+     * It saves the current round, total words remembered, and word list.
+     */
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt(KEY_CURRENT_ROUND, currentRound)
@@ -61,12 +74,20 @@ class MemoryWordsGame : AppCompatActivity() {
         outState.putStringArrayList(KEY_WORD_LIST, ArrayList(wordList))
     }
 
+    /**
+     * This function starts a new game.
+     * It clears the word list, adds new words, and displays them.
+     */
     private fun startNewGame() {
         wordList.clear()
         wordList.addAll(wordListInstance.words.shuffled().take(3))
         displayWords()
     }
 
+    /**
+     * This function displays the words to remember.
+     * It starts a countdown timer and hides the words when the timer finishes.
+     */
     @SuppressLint("SetTextI18n")
     private fun displayWords() {
         val wordsToShow = wordList.joinToString(", ")
@@ -88,6 +109,10 @@ class MemoryWordsGame : AppCompatActivity() {
         }.start()
     }
 
+    /**
+     * This function is called when the submit button is clicked.
+     * It evaluates the round and either starts a new round or ends the game.
+     */
     private fun evaluateRound() {
         val recalledWords = etRecalledWords.text.toString().trim()
             .split("\\s+|,\\s*".toRegex())
@@ -109,6 +134,10 @@ class MemoryWordsGame : AppCompatActivity() {
         }
     }
 
+    /**
+     * This function is called when the game ends.
+     * It calculates the average words remembered, provides feedback, and saves the game data to Firestore.
+     */
     private fun showResults() {
         val averageWordsRemembered = totalWordsRemembered / 5f
         val feedback = when {
@@ -121,7 +150,6 @@ class MemoryWordsGame : AppCompatActivity() {
         val resultsText = "Your short-term memory performance is $feedback based on the number of words you remembered."
 
         val db = Firebase.firestore
-
         val userId = Firebase.auth.currentUser?.uid
 
         val game = hashMapOf(

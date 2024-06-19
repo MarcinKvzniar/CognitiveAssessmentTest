@@ -17,8 +17,13 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.firestore
 import java.text.SimpleDateFormat
 
+/**
+ * This is the registration activity for the application.
+ * It handles user registration and navigation to the login activity.
+ */
 class RegisterActivity : AppCompatActivity() {
 
+    // UI elements and Firebase authentication instance
     private lateinit var btnRegister: Button
     private lateinit var btnGoToLogin: TextView
     private lateinit var inputUsernameReg: EditText
@@ -28,6 +33,10 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var inputRepPasswordReg: EditText
     private lateinit var firebaseAuth: FirebaseAuth
 
+    /**
+     * This function is called when the activity is starting.
+     * It initializes the activity, sets the content view, and sets up the button listeners.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -46,6 +55,9 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * This function initializes the UI elements and Firebase authentication instance.
+     */
     private fun initViews() {
         btnRegister = findViewById(R.id.btnRegister)
         btnGoToLogin = findViewById(R.id.btnGoToLogin)
@@ -58,6 +70,13 @@ class RegisterActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
     }
 
+    /**
+     * This function validates the registration details entered by the user.
+     * It checks if the username, date of birth, email, and password fields are not empty.
+     * It also checks if the password contains special characters and if the repeated password matches the original password.
+     *
+     * @return Returns true if the registration details are valid, false otherwise.
+     */
     private fun validateRegisterDetails(): Boolean {
         val specialChars = "!@#$%^&*-_+(){}/[]|".toCharArray()
 
@@ -104,6 +123,10 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * This function registers the user.
+     * It validates the registration details and creates a new user with Firebase.
+     */
     private fun registerUser() {
         val email = inputEmailReg.text.toString().trim()
         val password = inputPasswordReg.text.toString().trim()
@@ -139,7 +162,7 @@ class RegisterActivity : AppCompatActivity() {
 
                     startActivity(
                         Intent(this@RegisterActivity,
-                        LoginActivity::class.java)
+                            LoginActivity::class.java)
                     )
                     finish()
                 } else {
@@ -148,6 +171,12 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
+    /**
+     * This function checks if a given date is valid.
+     *
+     * @param date The date to be checked.
+     * @return Returns true if the date is valid, false otherwise.
+     */
     @SuppressLint("SimpleDateFormat")
     private fun isDateValid(date: String): Boolean {
         val format = SimpleDateFormat("yyyy-MM-dd")
@@ -160,10 +189,18 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * This function displays a basic toast message.
+     *
+     * @param message The message to be displayed in the toast.
+     */
     private fun showBasicToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
+    /**
+     * This function is called when the user registration is successful.
+     */
     fun userRegistrationSuccess() {
         Toast.makeText(this@RegisterActivity, getString(R.string.register_success),
             Toast.LENGTH_LONG).show()

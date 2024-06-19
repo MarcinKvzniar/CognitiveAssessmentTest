@@ -23,28 +23,39 @@ import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import java.util.Date
 
+/**
+ * This is the main activity for the Sudoku game.
+ * It handles the game logic, including the countdown timers, button listeners, and game end.
+ */
 class SudokuActivity : AppCompatActivity() {
 
+    // UI elements and game variables
     private lateinit var gridLayout: GridLayout
     private lateinit var solveButton: Button
     private val sudokuGenerator = SudokuGenerator()
-
     private var seconds = 0
     private var running = true
     private lateinit var tvTimer: TextView
     private val handler = Handler(Looper.getMainLooper())
 
+    /**
+     * This function is called when the activity is starting.
+     * It initializes the activity, sets the content view, and starts the game.
+     */
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sudoku)
 
+        // Initialize the UI elements
         gridLayout = findViewById(R.id.sudokuGrid)
         solveButton = findViewById(R.id.solveButton)
         tvTimer = findViewById(R.id.tvTimer)
 
+        // Start the game timer
         runTimer()
 
+        // Create the Sudoku grid
         for (i in 0 until 16) {
             val editText = EditText(this)
             editText.layoutParams = GridLayout.LayoutParams().apply {
@@ -87,13 +98,14 @@ class SudokuActivity : AppCompatActivity() {
         }
         gridLayout.setPadding(10, 10, 10, 10)
 
+        // Add sample numbers to the Sudoku grid
         addSampleNumbers()
 
+        // Set up the solve button listener
         solveButton.setOnClickListener {
             running = false
             if (checkSudokuValidity()) {
                 Toast.makeText(this, "Sudoku is solved!", Toast.LENGTH_SHORT).show()
-
                 val db = Firebase.firestore
                 val userId = Firebase.auth.currentUser?.uid
 
@@ -126,6 +138,9 @@ class SudokuActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * This function adds sample numbers to the Sudoku grid.
+     */
     private fun addSampleNumbers() {
         val numbers = mutableListOf(1, 2, 3, 4)
         numbers.shuffle()
@@ -143,6 +158,9 @@ class SudokuActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * This function starts the game timer.
+     */
     private fun runTimer() {
         val runnable = object : Runnable {
             @SuppressLint("DefaultLocale")
@@ -160,6 +178,10 @@ class SudokuActivity : AppCompatActivity() {
         handler.post(runnable)
     }
 
+    /**
+     * This function checks if the Sudoku grid is valid.
+     * It returns true if the grid is valid, false otherwise.
+     */
     private fun checkSudokuValidity(): Boolean {
         val board = Array(4) { IntArray(4) }
         for (i in 0 until 4) {
@@ -175,4 +197,3 @@ class SudokuActivity : AppCompatActivity() {
         return true
     }
 }
-

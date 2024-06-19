@@ -16,8 +16,13 @@ import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import java.util.Date
 
+/**
+ * This is the main activity for the Color Match game.
+ * It handles the game logic, including the countdown timers, button listeners, and game end.
+ */
 class ColorMatchGame : AppCompatActivity() {
 
+    // UI elements and game variables
     private lateinit var buttons: Array<Button>
     private lateinit var timerTextView: TextView
     private var colors: MutableList<Int> = mutableListOf()
@@ -29,6 +34,10 @@ class ColorMatchGame : AppCompatActivity() {
     private lateinit var colorFlipTimer: CountDownTimer
     private lateinit var gameplayTimer: CountDownTimer
 
+    /**
+     * This function is called when the activity is starting.
+     * It initializes the activity, sets the content view, and starts the game.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_color_match_game)
@@ -53,6 +62,10 @@ class ColorMatchGame : AppCompatActivity() {
         startColorFlipCountDown()
     }
 
+    /**
+     * This function starts the color flip countdown.
+     * It flips the colors of the buttons after a certain time.
+     */
     private fun startColorFlipCountDown() {
         colorFlipTimer = object : CountDownTimer(5000, 1000) {
             @SuppressLint("SetTextI18n")
@@ -68,6 +81,10 @@ class ColorMatchGame : AppCompatActivity() {
         }.start()
     }
 
+    /**
+     * This function starts the gameplay timer.
+     * It counts the time elapsed since the start of the game.
+     */
     private fun startGameplayTimer() {
         gameStartTime = System.currentTimeMillis()
         gameplayTimer = object : CountDownTimer(Long.MAX_VALUE, 1000) {
@@ -86,6 +103,10 @@ class ColorMatchGame : AppCompatActivity() {
         setupButtonListeners()
     }
 
+    /**
+     * This function initializes the colors for the game.
+     * It creates a list of colors and shuffles them.
+     */
     private fun initializeColors() {
         val colorList = listOf(
             R.color.red, R.color.blue, R.color.green, R.color.yellow,
@@ -96,7 +117,10 @@ class ColorMatchGame : AppCompatActivity() {
         colors = colorList.shuffled().toMutableList()
     }
 
-    // Assign the shuffled colors to the buttons
+    /**
+     * This function assigns the shuffled colors to the buttons.
+     * It sets the background color of each button to a color from the shuffled list.
+     */
     private fun assignColorsToButtons() {
         for (i in buttons.indices) {
             buttons[i].tag = colors[i]  // Store the color in the button's tag
@@ -104,13 +128,20 @@ class ColorMatchGame : AppCompatActivity() {
         }
     }
 
-    // Flip all buttons to the default color
+    /**
+     * This function flips all buttons to the default color.
+     * It sets the background color of each button to the default color.
+     */
     private fun flipAllButtonsToDefault() {
         for (button in buttons) {
             button.setBackgroundColor(resources.getColor(R.color.default_color, theme))
         }
     }
 
+    /**
+     * This function sets up the button listeners.
+     * It assigns an onClick listener to each button.
+     */
     private fun setupButtonListeners() {
         for (button in buttons) {
             button.setOnClickListener {
@@ -119,6 +150,10 @@ class ColorMatchGame : AppCompatActivity() {
         }
     }
 
+    /**
+     * This function is called when a button is clicked.
+     * It handles the game logic when a button is clicked.
+     */
     private fun onButtonClicked(button: Button) {
         if (button == firstSelected || button == secondSelected) return
 
@@ -136,7 +171,11 @@ class ColorMatchGame : AppCompatActivity() {
         }
     }
 
-    // Check if the selected buttons match
+    /**
+     * This function checks if the selected buttons match.
+     * If they match, it increments the pairs found and disables the buttons.
+     * If they don't match, it flips the buttons back to the default color.
+     */
     private fun checkForMatch() {
         if (firstSelected?.tag == secondSelected?.tag) {
             pairsFound++
@@ -153,10 +192,13 @@ class ColorMatchGame : AppCompatActivity() {
         secondSelected = null
     }
 
+    /**
+     * This function is called when the game ends.
+     * It stops the gameplay timer, calculates the time taken, and saves the game data to Firestore.
+     */
     private fun endGame() {
         // Stop the gameplay timer
         gameplayTimer.cancel()
-
         // Calculate the time taken to complete the game
         val timeTaken = ((System.currentTimeMillis() - gameStartTime) / 1000).toInt()
 
@@ -207,6 +249,10 @@ class ColorMatchGame : AppCompatActivity() {
             }
     }
 
+    /**
+     * This function is called when the activity is destroyed.
+     * It cancels the countdown timers.
+     */
     override fun onDestroy() {
         super.onDestroy()
         colorFlipTimer.cancel()
