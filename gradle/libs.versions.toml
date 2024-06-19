@@ -16,6 +16,8 @@ mongodbDriverKotlinCoroutine = "4.10.1"
 mongodbKotlinDriver = "1.2.1"
 reactorCore = "3.5.0"
 slf4jSimple = "1.7.9"
+firebaseAuthKtx = "23.0.0"
+firebaseFirestoreKtx = "25.0.0"
 
 [libraries]
 android-adapters = { module = "io.realm:android-adapters", version.ref = "androidAdapters" }
@@ -34,6 +36,8 @@ mongodb-driver-kotlin-coroutine = { module = "org.mongodb:mongodb-driver-kotlin-
 mongodb-kotlin-driver = { module = "org.mongodb.kotlin:mongodb-kotlin-driver", version.ref = "mongodbKotlinDriver" }
 reactor-core = { module = "io.projectreactor:reactor-core", version.ref = "reactorCore" }
 slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4jSimple" }
+firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
+firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

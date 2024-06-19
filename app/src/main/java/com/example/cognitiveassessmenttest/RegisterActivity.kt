@@ -1,16 +1,18 @@
 package com.example.cognitiveassessmenttest
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.cognitiveassessmenttest.Firestore.FireStoreClass
+import com.example.cognitiveassessmenttest.Firestore.User
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import java.text.SimpleDateFormat
 
 class RegisterActivity : AppCompatActivity() {
@@ -23,6 +25,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var inputEmailReg: EditText
     private lateinit var inputPasswordReg: EditText
     private lateinit var inputRepPasswordReg: EditText
+    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +46,8 @@ class RegisterActivity : AppCompatActivity() {
         inputEmailReg = findViewById(R.id.inputEmailReg)
         inputPasswordReg = findViewById(R.id.inputPasswordReg)
         inputRepPasswordReg = findViewById(R.id.inputRepeatPasswordReg)
+
+        firebaseAuth = FirebaseAuth.getInstance()
     }
 
     private fun validateRegisterDetails(): Boolean {
@@ -95,6 +100,34 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    private fun registerUser() {
+        val email = inputEmailReg.text.toString().trim()
+        val password = inputPasswordReg.text.toString().trim()
+        val name = inputNameReg.text.toString().trim()
+        val surname = inputSurnameReg.text.toString().trim()
+        val dob = inputDateOfBirthReg.text.toString().trim()
+
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val firebaseUser: FirebaseUser = task.result?.user!!
+                    showBasicToast("You are registered successfully." +
+                            " Your user id is ${firebaseUser.uid}")
+
+                    val user = User("Test ID", name, surname, dob, email, true)
+                    FireStoreClass().registerUserFS(this@RegisterActivity, user)
+
+                    startActivity(
+                        Intent(this@RegisterActivity,
+                        LoginActivity::class.java)
+                    )
+                    finish()
+                } else {
+                    showBasicToast(task.exception?.message.toString())
+                }
+            }
+    }
+
     @SuppressLint("SimpleDateFormat")
     private fun isDateValid(date: String): Boolean {
         val format = SimpleDateFormat("yyyy-MM-dd")
@@ -109,5 +142,11 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun showBasicToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun goToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
