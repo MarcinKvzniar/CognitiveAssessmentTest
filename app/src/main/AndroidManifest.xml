@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.CognitiveAssessmentTest"
+        tools:targetApi="31">
+        <activity
+            android:name=".sudoku.SudokuResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".colorMatch.ResultActivityColorMatch"
+            android:exported="false" />
+        <activity
+            android:name=".colorMatch.ColorMatchGame"
+            android:exported="false" />
+        <activity
+            android:name=".colorMatch.ColorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".memoryWords.ResultActivityMemoryWords"
+            android:exported="false" />
+        <activity
+            android:name=".memoryWords.MemoryWordsGame"
+            android:exported="false" />
+        <activity
+            android:name=".memoryWords.MemoryWordsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".sudoku.SudokuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".sudoku.SudokuInstructionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
