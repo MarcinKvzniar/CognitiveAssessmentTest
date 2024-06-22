@@ -39,8 +39,8 @@ class SudokuResultActivity : AppCompatActivity() {
 
         // Determine the time category based on the time taken
         val timeCategory = when {
-            timeTaken <= 60 -> "Very Good"
-            timeTaken in 61..120 -> "Average"
+            timeTaken <= 57 -> "Very Good"
+            timeTaken in 58..103 -> "Average"
             else -> "Below Average"
         }
 
